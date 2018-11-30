@@ -1,0 +1,33 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        config {
+            keyAlias 'cronzykey'
+            keyPassword 'ok0970099949'
+            storeFile file('D:/keystorepath/key.jks')
+            storePassword 'ok0970099949'
+        }
+    }
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "cronzy.com.cronzypicker"
+        minSdkVersion 17
+        targetSdkVersion 28
+        versionCode 2
+        versionName "1.1"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    implementation group: 'com.android.support', name: 'appcompat-v7', version: '28.0.0'
+    implementation 'petrov.kristiyan.colorpicker:colorpicker-library:1.1.2'
+}
