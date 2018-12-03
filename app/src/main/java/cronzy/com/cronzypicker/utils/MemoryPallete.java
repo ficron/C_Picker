@@ -1,4 +1,4 @@
-package cronzy.com.cronzypicker.main;
+package cronzy.com.cronzypicker.utils;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import cronzy.com.cronzypicker.R;
-import cronzy.com.cronzypicker.constants.Constants;
+import cronzy.com.cronzypicker.constants.ProjectConstants;
 import cronzy.com.cronzypicker.utils.ArchieveColors;
 import cronzy.com.cronzypicker.views.ColorCirclePicker;
 import cronzy.com.cronzypicker.views.MemoryCircle;
@@ -19,7 +19,7 @@ import cronzy.com.cronzypicker.views.MemoryCircle;
 /**
  * Created by Олександр on 03.10.2018.
  */
-public class MemoryPallete implements Constants {
+public class MemoryPallete {
 
     private List<MemoryCircle> circlesList;
     private LinearLayout conteinerForViews;
@@ -113,12 +113,12 @@ public class MemoryPallete implements Constants {
 
     public void updateViewColors() {
         List<Integer> list = new ArrayList<>();
-        for (int i : Constants.colors) list.add(i);
+        for (int i : ProjectConstants.defaultColors) list.add(i);
         mUpdateVievwColors(list);
     }
 
     private void mUpdateVievwColors(List<Integer> hexColors) {
-        Log.d(TAG, "setViewColors()");
+        Log.d(ProjectConstants.TAG, "setViewColors()");
         Iterator<MemoryCircle> it = circlesList.iterator();
         int i = 1;
         while (it.hasNext()) {

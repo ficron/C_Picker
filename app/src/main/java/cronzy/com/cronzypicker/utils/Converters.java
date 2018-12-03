@@ -3,9 +3,9 @@ package cronzy.com.cronzypicker.utils;
 import android.graphics.Color;
 import android.util.Log;
 
-import cronzy.com.cronzypicker.constants.Constants;
+import cronzy.com.cronzypicker.constants.ProjectConstants;
 
-public class Converters implements Constants {
+public class Converters  {
 
 
     public float[] HValue(String rgb) {
@@ -22,7 +22,7 @@ public class Converters implements Constants {
                 Color.RGBToHSV(r, g, b, hsv);
             }
         } catch (Exception nfeEx) {
-            Log.d(TAG + " " + getClass() + " ", "Exception " + nfeEx.getMessage());
+            Log.d(ProjectConstants.TAG + " " + getClass() + " ", "Exception " + nfeEx.getMessage());
         }
         return hsv;
     }

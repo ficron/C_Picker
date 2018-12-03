@@ -14,12 +14,12 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import cronzy.com.cronzypicker.constants.ProjectConstants;
 import cronzy.com.cronzypicker.utils.ColorUtils;
-import cronzy.com.cronzypicker.constants.Constants;
 import cronzy.com.cronzypicker.utils.Converters;
 import cronzy.com.cronzypicker.R;
 
-public class ColorCirclePicker extends View implements View.OnTouchListener, Constants {
+public class ColorCirclePicker extends View implements View.OnTouchListener {
 
     private OnColorChangeListener listener;
     Context gContext;
@@ -116,7 +116,7 @@ public class ColorCirclePicker extends View implements View.OnTouchListener, Con
     }
 
     public void setUsedColor(String RGBcolor) {
-        Log.d(TAG, "setUsedColor: " + RGBcolor);
+        Log.d(ProjectConstants.TAG, "setUsedColor: " + RGBcolor);
         float innerhsv[] = new Converters().HValue(RGBcolor);
         if (innerhsv[0] != -1) {
             SetUsedColorFromMass(innerhsv);
@@ -144,11 +144,11 @@ public class ColorCirclePicker extends View implements View.OnTouchListener, Con
 
     private void calculateSizes() {
         float mKoef = size*0.5f;
-        raidus_gradient = size * RAD_OUTER_SHADER_CIRCLE;
-        radius_centr = size * RAD_INNER_MAIN_CIRCLE;
-        radius_rotate_border = size * RAD_OUTER_ROTARY_CIRCLE;
-        radius_rotate_inner = size * RAD_INNER_ROTARY_CIRCLE;
-        p_gradient.setStrokeWidth(size * WIDTH_SHADER_BORDER);
+        raidus_gradient = size * ProjectConstants.RAD_OUTER_SHADER_CIRCLE;
+        radius_centr = size * ProjectConstants.RAD_INNER_MAIN_CIRCLE;
+        radius_rotate_border = size * ProjectConstants.RAD_OUTER_ROTARY_CIRCLE;
+        radius_rotate_inner = size * ProjectConstants.RAD_INNER_ROTARY_CIRCLE;
+        p_gradient.setStrokeWidth(size * ProjectConstants.WIDTH_SHADER_BORDER);
         coordinateCentrX = mKoef;
         coordinateCentrY = mKoef-radius_rotate_border;
     }
@@ -263,9 +263,9 @@ public class ColorCirclePicker extends View implements View.OnTouchListener, Con
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         mWidth = measure(widthMeasureSpec);
         mHeight = measure(heightMeasureSpec);
-        Log.d(TAG, "mWidth=" + mWidth + " /mHeight=" + mHeight);
+        Log.d(ProjectConstants.TAG, "mWidth=" + mWidth + " /mHeight=" + mHeight);
         size = Math.min(mWidth, mHeight);
-        int fdd = Math.round(size*RAD_OUTER_ROTARY_CIRCLE);
+        int fdd = Math.round(size*ProjectConstants.RAD_OUTER_ROTARY_CIRCLE);
         setMeasuredDimension(size, size-fdd*2);
         calculateSizes();
     }
@@ -284,10 +284,10 @@ public class ColorCirclePicker extends View implements View.OnTouchListener, Con
                 float virtualRadius = (float) Math.sqrt(a * a + b * b);
 
                 if (virtualRadius > radius_centr) {
-                    mMode = SET_COLOR;
+                    mMode = ProjectConstants.SET_COLOR;
                     listener.onDismiss(mColor, 1);
                 } else {
-                    mMode = SET_INNER;
+                    mMode = ProjectConstants.SET_INNER;
                     //Log.d("MyLog","onTouch virtualRadius<radius_centr");
                 }
 
@@ -298,11 +298,11 @@ public class ColorCirclePicker extends View implements View.OnTouchListener, Con
                 float y = motionEvent.getY() - coordinateCentrY;
 
                 switch (mMode) {
-                    case SET_COLOR:
+                    case ProjectConstants.SET_COLOR:
                         setColScale(getAngle(x, y), 1f, 1f);
                         listener.onColorChanged(mColor, 1);
                         break;
-                    case SET_INNER:
+                    case ProjectConstants.SET_INNER:
                         break;
                 }
                 invalidate();

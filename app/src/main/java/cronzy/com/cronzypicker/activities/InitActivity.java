@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,7 +22,6 @@ import java.util.Map;
 import java.util.Set;
 
 import cronzy.com.cronzypicker.R;
-import cronzy.com.cronzypicker.constants.Constants;
 import cronzy.com.cronzypicker.constants.ProjectConstants;
 
 
@@ -57,6 +57,7 @@ public class InitActivity extends Activity  {
 
         if (!bluetoothAdress.equals(ProjectConstants.APP_DEFAULT_NAME_VALUE)) {
             Intent intent = new Intent(InitActivity.this, MainActivity.class);
+            Log.d(ProjectConstants.TAG_BT,"bluetoothAdress: "+bluetoothAdress);
             intent.putExtra(ProjectConstants.APP_DEFAULT_NAME_VALUE, bluetoothAdress);
             startActivity(intent);
         }
@@ -70,16 +71,16 @@ public class InitActivity extends Activity  {
 
 
     private String getBluetoothAdress() {
-        if (mSettings.contains(APP_PREFERENCES_NAME)) {
-            return mSettings.getString(APP_PREFERENCES_NAME, APP_DEFAULT_NAME_VALUE);
+        if (mSettings.contains(ProjectConstants.APP_PREFERENCES_NAME)) {
+            return mSettings.getString(ProjectConstants.APP_PREFERENCES_NAME, ProjectConstants.APP_DEFAULT_NAME_VALUE);
         }
-        return APP_DEFAULT_NAME_VALUE;
+        return ProjectConstants.APP_DEFAULT_NAME_VALUE;
     }
 
 
     private void editSPBluetoothAdress(String bluetothAdress) {
         SharedPreferences.Editor editor = mSettings.edit();
-        editor.putString(APP_PREFERENCES_NAME, bluetothAdress);
+        editor.putString(ProjectConstants.APP_PREFERENCES_NAME, bluetothAdress);
         editor.apply();
         Toast.makeText(getApplicationContext(), "Address add to sp: " + bluetothAdress, Toast.LENGTH_SHORT).show();
     }
@@ -112,14 +113,4 @@ public class InitActivity extends Activity  {
             }
         });
     }
-
-
-
-
-
-
-
-
-
-
 }

@@ -2,9 +2,9 @@ package cronzy.com.cronzypicker.utils;
 
 import java.util.ArrayList;
 
-import cronzy.com.cronzypicker.constants.Constants;
+import cronzy.com.cronzypicker.constants.ProjectConstants;
 
-public class ArchieveColors implements Constants{
+public class ArchieveColors{
 
     ArrayList<Integer> archiveList;
 
@@ -40,7 +40,7 @@ public class ArchieveColors implements Constants{
 
     private void completeList(){
         for(int b=0; archiveList.size()<6;b++){
-            archiveList.add(Constants.colors[b]);
+            archiveList.add(ProjectConstants.defaultColors[b]);
         }
     }
 

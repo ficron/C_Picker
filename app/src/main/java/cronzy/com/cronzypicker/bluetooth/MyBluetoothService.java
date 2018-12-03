@@ -1,4 +1,4 @@
-package cronzy.com.cronzypicker.main;
+package cronzy.com.cronzypicker.bluetooth;
 
 
 import android.bluetooth.BluetoothAdapter;
@@ -17,9 +17,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.UUID;
 
-import cronzy.com.cronzypicker.constants.Constants;
+import cronzy.com.cronzypicker.constants.ProjectConstants;
 
-public class MyBluetoothService implements Constants {
+public class MyBluetoothService  {
     private static final String TAG = "MY_APP_DEBUG_TAG";
     private Handler handler; // handler that gets info from Bluetooth service
 
@@ -64,7 +64,7 @@ public class MyBluetoothService implements Constants {
         public void run() {
             mmBuffer = new byte[1024];
             int numBytes; // bytes returned from read()
-            Log.d(TAG_Handle,"i am in run()");
+            Log.d(ProjectConstants.TAG_Handle,"i am in run()");
             // Keep listening to the InputStream until an exception occurs.
             while (true) {
                 try {
@@ -149,14 +149,14 @@ public class MyBluetoothService implements Constants {
         btAdapter.cancelDiscovery();
 
         // Establish the connection.  This will block until it connects.
-        Log.d(TAG_BT, "...Соединяемся...");
+        Log.d(ProjectConstants.TAG_BT, "...Соединяемся...");
 
         if (btSocket != null) {
             try {
                 btSocket.connect();
-                Log.d(TAG_BT, "...Соединение установлено и готово к передачи данных...");
+                Log.d(ProjectConstants.TAG_BT, "...Соединение установлено и готово к передачи данных...");
             } catch (IOException e) {
-                Log.d(TAG_BT, "IOException: "+e.getMessage());
+                Log.d(ProjectConstants.TAG_BT, "IOException: "+e.getMessage());
                 try {
                     Log.e("", "trying fallback...");
                     btSocket = (BluetoothSocket) device.getClass().getMethod("createRfcommSocket", new Class[]{int.class}).invoke(device, 1);
@@ -180,12 +180,12 @@ public class MyBluetoothService implements Constants {
         if (Build.VERSION.SDK_INT >= 10) {
             try {
                 final Method m = device.getClass().getMethod("createInsecureRfcommSocketToServiceRecord", new Class[]{UUID.class});
-                return (BluetoothSocket) m.invoke(device, Constants.MY_UUID);
+                return (BluetoothSocket) m.invoke(device, ProjectConstants.MY_UUID);
             } catch (Exception e) {
                 Log.e(TAG, "Could not create Insecure RFComm Connection", e);
             }
         }
-        return device.createRfcommSocketToServiceRecord(Constants.MY_UUID);
+        return device.createRfcommSocketToServiceRecord(ProjectConstants.MY_UUID);
     }
 
 
